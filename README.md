@@ -7,8 +7,9 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
 
-🔗 **Live Site:** [https://your-deployed-url.vercel.app](https://your-deployed-url.vercel.app)
+🔗 **Live Site:** [https://fitlog-by-aurpon.vercel.app](https://fitlog-by-aurpon.vercel.app)  
 📂 **GitHub Repository:** [https://github.com/kaziaurpon/FitLog-by-Aurpon](https://github.com/kaziaurpon/FitLog-by-Aurpon)
+
 
 ---
 
