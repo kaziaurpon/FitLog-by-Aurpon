@@ -1,49 +1,55 @@
-# 💪 FitLog — Workout Library
+# 🏋️ FitLog — Workout Library
 
-FitLog is a dark, no-nonsense gym companion built for the B14-A6 assignment. Pick a lift from the library, lock it into today's plan or save it for later, and watch your exercises, minutes, and calories add up in real time — with everything persisted so your progress survives a page reload.
+> A dark, no-nonsense gym companion — browse a workout library, build today's plan, save lifts for later, and watch your exercises, minutes, and calories add up in real time.
 
-**Live Link:** _add your deployed URL here_
-**GitHub Repository:** _add your repo URL here_
+![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+
+🔗 **Live Site:** [https://your-deployed-url.vercel.app](https://your-deployed-url.vercel.app)
+📂 **GitHub Repository:** [https://github.com/kaziaurpon/FitLog-by-Aurpon](https://github.com/kaziaurpon/FitLog-by-Aurpon)
+
+---
+
+## 📖 About the Project
+
+FitLog is a responsive Next.js + TypeScript web app that helps people browse a library of twelve gym lifts, view detailed instructions and key specs for each one, lock lifts into a daily "Today's Plan" or save them for later, and track live progress — all with a clean, dark, gradient-accented UI built entirely with Tailwind CSS.
 
 ## 🛠️ Technologies Used
 
 - **Next.js 14** (App Router) — routing, pages, and rendering
-- **TypeScript** — type-safe components and data layer
-- **Tailwind CSS** — styling and full responsiveness
+- **TypeScript** — static typing for safer, more predictable components
+- **Tailwind CSS** — utility-first styling and full responsiveness
 - **React Context + localStorage** — global state for the plan/saved lists that persists across reloads
-- **Fitlog REST API** — live workout data (`https://api.abcz.workers.dev/api/fitlog`)
+- **FitLog REST API** — live workout data, loaded via `fetch` (`https://api.abcz.workers.dev/api/fitlog`)
 
-## ✨ Key Features
+## ✨ Features
 
-1. **Dynamic workout library** — all lifts are fetched live from the API and rendered in a responsive 3×4 grid, each card showing image, category tags, equipment, and a duration/calories/rating stats row.
-2. **Workout detail pages** — a two-column layout with a key-specs panel and step-by-step instructions for every lift, driven by a dynamic `/workout/[id]` route.
-3. **Today's Plan & Saved tracking** — "Add to today's plan" and "Save for later" update live navbar badge counters and show toast notifications, with a 5-lift daily cap.
-4. **My Plan dashboard** — live metrics (exercises, minutes, calories), tabbed Today's Plan / Saved views, Mark as Done and Remove actions, and a friendly empty state.
-5. **Sort & search** — reorder the library by Duration, Calories, or Rating, or search by name/tag, plus a custom 404 page and loading states throughout.
+1. **🏋️ Browse the Workout Library** — A responsive card grid (3 columns on desktop, 2 on tablet, 1 on mobile) shows each lift's image, muscle-group tags, equipment, and a duration/calories/rating stats row, all loaded live from the API instead of being hardcoded.
 
-## 📁 Project Structure
+2. **📋 Detailed Workout Pages** — Clicking any card opens a dynamic `/workout/[id]` page with a large image, a key-specs panel (equipment, difficulty, sets, reps, duration, calories, rating), and a numbered list of step-by-step instructions.
 
-```
-app/
-  page.tsx              → Home (hero + library)
-  workout/[id]/page.tsx → Workout detail page
-  my-plan/page.tsx      → My Plan dashboard
-  not-found.tsx         → Custom 404 page
-components/             → Navbar, Footer, WorkoutCard, Toasts, SortDropdown, icons
-lib/                    → types.ts, api.ts (fetch + normalize), store.tsx (state + localStorage)
-public/assets/          → logo and hero illustration
-```
+3. **➕ Build Today's Plan & Save for Later** — "Add to today's plan" and "Save for later" buttons on the detail page instantly update the navbar's live Plan/Saved badge counters and show a toast notification, with a 5-lift daily cap enforced on the plan.
+
+4. **✅ Manage Your Plan** — The My Plan dashboard shows live metrics (exercises, minutes, calories) for the active tab, with Today's Plan / Saved tabs, a "Mark as Done" button, and a ✕ "Remove" button on every card — each action confirmed with a toast, plus a friendly empty state when a tab has nothing in it.
+
+5. **🔀 Sort, Search & Persist** — A "Sort By" dropdown (Duration/Calories/Rating) re-sorts the current list on both the home page and My Plan, a search box filters the library by name or tag, and everything is saved to `localStorage` so plans and saved items survive a page reload — all backed by a custom 404 page and loading states throughout.
 
 ## 🚀 Getting Started
 
+Clone the repository and run it locally:
+
 ```bash
+git clone https://github.com/kaziaurpon/FitLog-by-Aurpon.git
+cd FitLog-by-Aurpon
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+The app will be available at `http://localhost:3000`.
 
-## 📦 Build
+## 📦 Build for Production
 
 ```bash
 npm run build
