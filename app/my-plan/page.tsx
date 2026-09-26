@@ -87,17 +87,7 @@ export default function MyPlanPage() {
     [saved, library]
   );
 
-  const metrics = useMemo(() => {
-    return planWorkouts.reduce(
-      (acc, { workout }) => ({
-        exercises: acc.exercises + 1,
-        minutes: acc.minutes + workout.duration,
-        calories: acc.calories + workout.calories,
-      }),
-      { exercises: 0, minutes: 0, calories: 0 }
-    );
-  }, [planWorkouts]);
-
+  // নতুন কোড (এটা বসাও — খেয়াল করো, এখন activeList আগে বসেছে, metrics পরে):
   const activeList = useMemo(() => {
     const list = tab === "today" ? planWorkouts : savedWorkouts;
     return [...list].sort((a, b) => {
@@ -105,6 +95,17 @@ export default function MyPlanPage() {
       return a.workout[sort] - b.workout[sort];
     });
   }, [tab, planWorkouts, savedWorkouts, sort]);
+
+  const metrics = useMemo(() => {
+    return activeList.reduce(
+      (acc, { workout }) => ({
+        exercises: acc.exercises + 1,
+        minutes: acc.minutes + workout.duration,
+        calories: acc.calories + workout.calories,
+      }),
+      { exercises: 0, minutes: 0, calories: 0 }
+    );
+  }, [activeList]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
