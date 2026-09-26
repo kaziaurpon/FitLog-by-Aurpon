@@ -43,24 +43,24 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="col-start-3 flex items-center gap-4 justify-self-end">
+        <div className="col-start-3 flex items-center gap-2 justify-self-end">
           <Link
             href="/my-plan"
-            className="flex items-center gap-2 text-xs font-semibold text-white"
+            className="flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-xs font-semibold text-black transition-transform hover:scale-105"
             aria-label="Today's plan"
           >
             Plan
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold leading-none text-black">
+            <span className="rounded-full bg-black/15 px-1.5 py-0.5 text-[11px] leading-none">
               {planCount}
             </span>
           </Link>
           <Link
             href="/my-plan"
-            className="flex items-center gap-2 text-xs font-semibold text-white"
+            className="flex items-center gap-1.5 rounded-full border border-base-border px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-accent hover:text-accent"
             aria-label="Saved workouts"
           >
             Saved
-            <span className="flex h-5 w-5 items-center justify-center rounded-full border border-base-border text-[11px] font-bold leading-none text-white">
+            <span className="rounded-full border border-base-border px-1.5 py-0.5 text-[11px] leading-none">
               {savedCount}
             </span>
           </Link>
