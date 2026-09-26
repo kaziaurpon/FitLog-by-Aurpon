@@ -64,8 +64,13 @@ export function normalizeWorkout(raw: RawWorkout): Workout {
         "/assets/banner.png"
       )
     ),
+    
     categories: toArray(
-      pick(raw, ["categories", "category", "tags", "muscleGroup", "target"], [])
+      pick(
+        raw,
+        ["muscleGroups", "categories", "category", "tags", "muscleGroup", "target"],
+        []
+      )
     ),
     equipment: String(
       pick(raw, ["equipment", "equipments", "gear"], "Bodyweight")
