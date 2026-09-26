@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useStore } from "@/lib/store";
 
 const links = [
-  { href: "/#library", label: "Workouts", match: "/" },
+  { href: "/#library", label: "Workout", match: "/" },
   { href: "/my-plan", label: "My Plan", match: "/my-plan" },
 ];
 
