@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { fetchWorkouts } from "@/lib/api";
-import { Workout } from "@/lib/types";
+import { SortKey, Workout } from "@/lib/types";
 import { WorkoutCard } from "@/components/WorkoutCard";
+import { SortDropdown } from "@/components/SortDropdown";
 import { ArrowDownIcon, SearchIcon } from "@/components/icons";
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortKey>("duration");
 
   useEffect(() => {
     let active = true;
@@ -41,8 +43,11 @@ export default function HomePage() {
           w.categories.some((c) => c.toLowerCase().includes(q))
       );
     }
-    return list;
-  }, [workouts, query]);
+    return [...list].sort((a, b) => {
+      if (sort === "rating") return b.rating - a.rating;
+      return a[sort] - b[sort];
+    });
+  }, [workouts, query, sort]);
 
   return (
     <div>
@@ -59,10 +64,7 @@ export default function HomePage() {
               FitLog is a dark, no-nonsense gym companion: pick a lift, lock it
               into today&apos;s plan, and watch the week&apos;s work add up.
             </p>
-            <a
-              href="#library"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-black transition-transform hover:scale-105"
-            >
+            <a href="#library" className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-black transition-transform hover:scale-105">
               Browse Workouts
               <ArrowDownIcon className="h-4 w-4" />
             </a>
@@ -90,14 +92,17 @@ export default function HomePage() {
                 Twelve lifts covering every major muscle group.
               </p>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-base-border bg-base-card px-4 py-2 sm:self-end">
-              <SearchIcon className="h-4 w-4 text-base-muted" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by name or tag"
-                className="w-40 bg-transparent text-sm text-white placeholder:text-base-muted focus:outline-none sm:w-56"
-              />
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-2 rounded-full border border-base-border bg-base-card px-4 py-2">
+                <SearchIcon className="h-4 w-4 text-base-muted" />
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search by name or tag"
+                  className="w-40 bg-transparent text-sm text-white placeholder:text-base-muted focus:outline-none sm:w-56"
+                />
+              </div>
+              <SortDropdown value={sort} onChange={setSort} />
             </div>
           </div>
 
