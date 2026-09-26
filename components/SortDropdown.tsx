@@ -34,12 +34,11 @@ export function SortDropdown({
 
   return (
     <div className="relative" ref={ref}>
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="flex min-w-[10rem] items-center justify-between gap-3 rounded-lg border border-base-border bg-base-card px-4 py-2 text-sm text-white hover:border-accent/60"
-      >
-        <span className="font-medium">{current.label}</span>
+      <button type="button" onClick={() => setOpen((o) => !o)} className="flex min-w-[11rem] items-center justify-between gap-3 rounded-full border border-base-border bg-base-card px-4 py-2 text-sm hover:border-accent/60">
+        <span className="text-base-muted">
+          Sort By{" "}
+          <span className="font-medium text-white">{current.label}</span>
+        </span>
         <ChevronDownIcon className={`h-4 w-4 text-base-muted transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (

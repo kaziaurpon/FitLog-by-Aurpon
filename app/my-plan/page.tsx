@@ -144,10 +144,7 @@ export default function MyPlanPage() {
             Saved
           </button>
         </div>
-        <div>
-          <p className="mb-1.5 text-xs text-base-muted">Sort By</p>
-          <SortDropdown value={sort} onChange={setSort} />
-        </div>
+                <SortDropdown value={sort} onChange={setSort} />
       </div>
 
       <div className="mt-6">
