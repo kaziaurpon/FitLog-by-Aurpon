@@ -107,11 +107,12 @@ export default function WorkoutDetailPage({
             {workout.description}
           </p>
 
+          {/* Updated Category Tags: Solid Lime background, Black text, Title Case */}
           <div className="mt-4 flex flex-wrap gap-2">
             {workout.categories.map((cat) => (
               <span
                 key={cat}
-                className="rounded-full border border-base-border px-3 py-1 text-xs font-semibold tracking-wide text-base-muted"
+                className="rounded-full bg-accent px-3 py-1 text-xs font-semibold capitalize text-black"
               >
                 {cat}
               </span>
