@@ -57,15 +57,22 @@ export default function MyPlanPage() {
 
   useEffect(() => {
     let active = true;
-    fetchWorkouts()
-      .then((data) => {
-        if (active) setLibrary(data);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
+    setLoading(true);
+
+    // Simulated network delay (400ms) so loading animation is visible during fetching
+    const timer = setTimeout(() => {
+      fetchWorkouts()
+        .then((data) => {
+          if (active) setLibrary(data);
+        })
+        .finally(() => {
+          if (active) setLoading(false);
+        });
+    }, 400);
+
     return () => {
       active = false;
+      clearTimeout(timer);
     };
   }, []);
 
@@ -75,7 +82,7 @@ export default function MyPlanPage() {
     () =>
       plan
         .map((p) => ({ item: p, workout: findWorkout(p.workoutId) }))
-        .filter((x): x is { item: typeof plan[number]; workout: Workout } => !!x.workout),
+        .filter((x): x is { item: (typeof plan)[number]; workout: Workout } => !!x.workout),
     [plan, library]
   );
 
@@ -83,11 +90,10 @@ export default function MyPlanPage() {
     () =>
       saved
         .map((s) => ({ item: s, workout: findWorkout(s.workoutId) }))
-        .filter((x): x is { item: typeof saved[number]; workout: Workout } => !!x.workout),
+        .filter((x): x is { item: (typeof saved)[number]; workout: Workout } => !!x.workout),
     [saved, library]
   );
 
-  // নতুন কোড (এটা বসাও — খেয়াল করো, এখন activeList আগে বসেছে, metrics পরে):
   const activeList = useMemo(() => {
     const list = tab === "today" ? planWorkouts : savedWorkouts;
     return [...list].sort((a, b) => {
@@ -145,14 +151,16 @@ export default function MyPlanPage() {
             Saved
           </button>
         </div>
-                <SortDropdown value={sort} onChange={setSort} />
+        <SortDropdown value={sort} onChange={setSort} />
       </div>
 
       <div className="mt-6">
         {loading && (
           <div className="flex flex-col items-center justify-center gap-4 py-16 text-base-muted">
-            <div className="h-10 w-10 animate-spin-slow rounded-full border-2 border-base-border border-t-accent" />
-            <p className="text-sm">Loading workouts…</p>
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-base-border border-t-accent" />
+            <p className="text-sm font-display uppercase tracking-widest">
+              Loading workouts…
+            </p>
           </div>
         )}
 
@@ -176,7 +184,8 @@ export default function MyPlanPage() {
         {!loading && activeList.length > 0 && (
           <ul className="flex flex-col gap-4">
             {activeList.map(({ item, workout }) => {
-              const isDone = tab === "today" && "status" in item && item.status === "done";
+              const isDone =
+                tab === "today" && "status" in item && item.status === "done";
               return (
                 <li
                   key={workout.id}
@@ -199,7 +208,9 @@ export default function MyPlanPage() {
                     >
                       {workout.name}
                     </h3>
-                    <p className="text-xs text-base-muted">{workout.equipment}</p>
+                    <p className="text-xs text-base-muted">
+                      {workout.equipment}
+                    </p>
                     <div className="mt-2 flex items-center gap-3 text-xs text-base-muted">
                       <span className="flex items-center gap-1">
                         <ClockIcon className="h-3.5 w-3.5" /> {workout.duration} min
